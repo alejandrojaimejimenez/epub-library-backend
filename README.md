@@ -91,31 +91,43 @@ Backend para aplicación de biblioteca EPUB con soporte para la base de datos de
 
 ### Libros
 
-- `GET /api/books` - Obtener todos los libros
-- `GET /api/books/:id` - Obtener un libro por ID
+- `GET /api/books` - Obtener todos los libros con paginación
+  - Parámetros opcionales: `limit` (cantidad por página), `offset` (índice de inicio)
+- `GET /api/books/:id` - Obtener un libro por ID con todos sus detalles
 - `GET /api/books/search?q=:query` - Buscar libros por título
+  - Parámetros opcionales: `limit` (cantidad por página), `offset` (índice de inicio)
+- `GET /api/books/:id/epub` - Obtener el archivo EPUB de un libro
+- `GET /api/books/:id/position` - Obtener la posición actual de lectura de un libro
+  - Parámetros opcionales: `format` (default: 'EPUB'), `user` (default: 'usuario1'), `device` (default: 'browser')
 - `PUT /api/books/:id/position` - Actualizar posición de lectura
+  - Cuerpo: `{ position: number, format: string, user: string, device: string, cfi: string }`
 
 ### Autores
 
 - `GET /api/authors` - Obtener todos los autores
 - `GET /api/authors/:id` - Obtener un autor por ID
-- `GET /api/books/author/:name` - Obtener libros por autor
+- `GET /api/books/author/:name` - Obtener libros por nombre de autor
 
 ### Etiquetas
 
 - `GET /api/tags` - Obtener todas las etiquetas
 - `GET /api/tags/:id` - Obtener una etiqueta por ID
-- `GET /api/books/tag/:name` - Obtener libros por etiqueta
+- `GET /api/books/tag/:name` - Obtener libros por nombre de etiqueta
 
 ### Búsqueda
 
-- `GET /api/search?q=:query&author=:authorId&tag=:tagId&series=:seriesId` - Búsqueda avanzada
+- `GET /api/search` - Búsqueda avanzada con filtros múltiples
+  - Parámetros: `q` (texto de búsqueda), `author` (ID autor), `tag` (ID tag), `series` (ID serie)
+  - Parámetros opcionales: `limit` (cantidad por página), `offset` (índice de inicio)
 
 ### Archivos
 
-- `GET /api/file/:path` - Obtener un archivo (EPUB, portada, etc.)
+- `GET /api/file/:id/:filename` - Obtener un archivo específico (EPUB, portada, etc.)
 - `GET /static/books/:path` - Acceso directo a archivos estáticos
+
+### Endpoint Principal
+
+- `GET /` - Verificar que el servidor está funcionando
 
 ## Licencia
 

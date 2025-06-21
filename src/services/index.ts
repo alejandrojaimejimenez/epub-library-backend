@@ -131,7 +131,22 @@ export const BookService = {
       `;
       execute(insertSql, [bookId, format, user, device, cfi, epoch, posFrac]);
     }
+  },  // Obtener la posición de lectura de un libro
+  getReadingPosition(
+    bookId: number,
+    format: string = 'EPUB',
+    user: string = 'usuario1',
+    device: string = 'browser'
+  ): LastReadPosition | null {
+    // Buscar la posición de lectura en la base de datos
+    const position = queryOne<LastReadPosition>(
+      'SELECT * FROM last_read_positions WHERE book = ? AND format = ? AND user = ? AND device = ? ORDER BY epoch DESC LIMIT 1',
+      [bookId, format, user, device]
+    );
+
+    return position || null;
   },
+
   // Obtener la ruta al archivo EPUB de un libro
   getBookEpubPath(id: number): string | null {
     // Obtener la información del libro

@@ -261,4 +261,38 @@ export const BookController = {
       });
     }
   },
+  // Obtener la posición de lectura de un libro
+  getReadingPosition(req: Request, res: Response): void {
+    try {
+      const id = parseInt(req.params.id, 10);
+      
+      if (isNaN(id)) {
+        res.status(400).json({
+          success: false,
+          message: 'ID de libro inválido'
+        });
+        return;
+      }
+      
+      // Obtener parámetros opcionales de la consulta
+      const format = req.query.format as string || 'EPUB';
+      const user = req.query.user as string || 'usuario1'; // Cambiado a 'usuario1' para coincidir con el PUT
+      const device = req.query.device as string || 'browser'; // Cambiado a 'browser' para coincidir con el PUT
+      
+      // Obtener la posición de lectura
+      const position = BookService.getReadingPosition(id, format, user, device);
+      
+      res.json({
+        success: true,
+        data: position
+      });
+    } catch (error) {
+      console.error(`Error al obtener la posición de lectura del libro con ID ${req.params.id}:`, error);
+      res.status(500).json({
+        success: false,
+        message: 'Error al obtener la posición de lectura',
+        error: (error as Error).message
+      });
+    }
+  },
 };
