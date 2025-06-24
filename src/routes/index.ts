@@ -4,6 +4,7 @@ import authorRoutes from './authorRoutes';
 import tagRoutes from './tagRoutes';
 import searchRoutes from './searchRoutes';
 import filterRoutes from './filterRoutes';
+import authRoutes from './authRoutes';
 import { BookController } from '../controllers';
 
 // Extender la interfaz Request para añadir el parámetro filepath
@@ -16,6 +17,9 @@ interface BookFileRequest extends Request {
 }
 
 const router = Router();
+
+// Montar las rutas de autenticación
+router.use('/auth', authRoutes);
 
 // Montar las rutas
 router.use('/books', bookRoutes);

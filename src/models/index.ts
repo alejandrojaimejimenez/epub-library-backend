@@ -101,3 +101,6 @@ export interface SearchResult {
   books: BookWithDetails[];
   total: number;
 }
+
+// Exportar modelos de usuario
+export * from './user';

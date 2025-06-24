@@ -2,6 +2,9 @@ import { query, queryOne, execute } from '../utils/database';
 import { Book, Author, Tag, Series, Comment, BookWithDetails, LastReadPosition } from '../models';
 import path from 'path';
 import config from '../config';
+import { UserService } from './userService';
+
+export { UserService };
 
 // Convertimos las funciones a síncronas ya que better-sqlite3 es síncrono
 // Servicio para los libros
@@ -337,5 +340,6 @@ export default {
   AuthorService,
   TagService,
   SeriesService,
-  SearchService
+  SearchService,
+  UserService
 };

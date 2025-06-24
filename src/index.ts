@@ -5,6 +5,14 @@ import config from './config';
 import routes from './routes';
 import { errorHandler, notFoundHandler } from './middlewares';
 import path from 'path';
+import { UserService } from './services';
+
+// Inicializar el servicio de usuarios
+(async () => {
+  const userService = UserService.getInstance();
+  await userService.initialize();
+  console.log('Servicio de usuarios inicializado correctamente');
+})();
 
 // Crear la aplicación Express
 const app = express();

@@ -5,6 +5,7 @@ Backend para aplicación de biblioteca EPUB con soporte para la base de datos de
 ## Características
 
 - API REST completa para acceder a una biblioteca de Calibre
+- Autenticación de usuarios con JWT
 - Soporte para lectura/escritura de archivos EPUB
 - Gestión de metadatos de libros
 - Gestión de portadas
@@ -88,6 +89,17 @@ Backend para aplicación de biblioteca EPUB con soporte para la base de datos de
 2. El servidor estará disponible en `http://localhost:3000`
 
 ## Endpoints de la API
+
+### Autenticación
+
+- `POST /api/auth/register` - Registrar un nuevo usuario
+  - Cuerpo: `{ username: string, email: string, password: string }`
+- `POST /api/auth/login` - Iniciar sesión
+  - Cuerpo: `{ username: string, password: string }`
+- `GET /api/auth/profile` - Obtener perfil del usuario autenticado
+  - Requiere: Header de autorización con token JWT
+
+> **Nota**: Todos los endpoints a continuación requieren autenticación mediante token JWT en el header de autorización (`Authorization: Bearer <token>`)
 
 ### Libros
 
