@@ -3,10 +3,26 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node dist/index.js",
+    "start": "node dist/main.js",
     "dev": "nodemon --exec ts-node src/index.ts",
     "build": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
+  },
+  "_moduleAliases": {
+    "@config": "dist/shared/config",
+    "@utils": "dist/shared/utils",
+    "@controllers": "dist/presentation/http/controllers",
+    "@middlewares": "dist/presentation/http/middlewares",
+    "@routes": "dist/presentation/http/routes",
+    "@auth": "dist/infrastructure/auth",
+    "@db": "dist/infrastructure/db",
+    "@repositories": "dist/domain/repositories",
+    "@models": "dist/domain/models",
+    "@application": "dist/application",
+    "@services": "dist/application/services",
+    "@dtos": "dist/application/dtos",
+    "@shared": "dist/shared",
+    "@infrastructure": "dist/infrastructure"
   },
   "keywords": [],
   "author": "",
@@ -17,14 +33,19 @@
     "bcrypt": "^6.0.0",
     "better-sqlite3": "^11.10.0",
     "body-parser": "^2.2.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.2",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "express-validator": "^7.2.1",
     "jsonwebtoken": "^8.5.1",
+    "module-alias": "^2.2.3",
     "multer": "^2.0.1",
+    "reflect-metadata": "^0.2.2",
     "sqlite": "^5.1.1",
-    "sqlite3": "^5.1.7"
+    "sqlite3": "^5.1.7",
+    "tsyringe": "^4.10.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",

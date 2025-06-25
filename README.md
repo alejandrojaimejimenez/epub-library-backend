@@ -90,56 +90,42 @@ Backend para aplicación de biblioteca EPUB con soporte para la base de datos de
 
 ## Endpoints de la API
 
+> Todas las rutas están versionadas bajo `/api/v1/` y, salvo `/auth/login` y `/auth/register`, requieren autenticación JWT (`Authorization: Bearer <token>`).
+
+### Healthcheck
+- `GET /api/v1/healthcheck` — Estado de salud de la API (pública)
+
 ### Autenticación
+- `POST /api/v1/auth/register` — Registrar un nuevo usuario
+- `POST /api/v1/auth/login` — Iniciar sesión
+- `GET /api/v1/auth/profile` — Perfil del usuario autenticado (requiere JWT)
 
-- `POST /api/auth/register` - Registrar un nuevo usuario
-  - Cuerpo: `{ username: string, email: string, password: string }`
-- `POST /api/auth/login` - Iniciar sesión
-  - Cuerpo: `{ username: string, password: string }`
-- `GET /api/auth/profile` - Obtener perfil del usuario autenticado
-  - Requiere: Header de autorización con token JWT
-
-> **Nota**: Todos los endpoints a continuación requieren autenticación mediante token JWT en el header de autorización (`Authorization: Bearer <token>`)
+### Usuarios
+- `POST /api/v1/users` — Crear usuario *(requiere JWT)*
+- `GET /api/v1/users` — Listar todos los usuarios *(requiere JWT)*
+- `GET /api/v1/users/:id` — Obtener usuario por ID *(requiere JWT)*
+- `PUT /api/v1/users/:id` — Actualizar usuario por ID *(requiere JWT)*
+- `DELETE /api/v1/users/:id` — Eliminar usuario por ID *(requiere JWT)*
 
 ### Libros
+- `GET /api/v1/books` — Listar todos los libros *(requiere JWT)*
+- `GET /api/v1/books/search` — Buscar libros *(requiere JWT)*
+- `GET /api/v1/books/:id` — Obtener libro por ID *(requiere JWT)*
 
-- `GET /api/books` - Obtener todos los libros con paginación
-  - Parámetros opcionales: `limit` (cantidad por página), `offset` (índice de inicio)
-- `GET /api/books/:id` - Obtener un libro por ID con todos sus detalles
-- `GET /api/books/search?q=:query` - Buscar libros por título
-  - Parámetros opcionales: `limit` (cantidad por página), `offset` (índice de inicio)
-- `GET /api/books/:id/epub` - Obtener el archivo EPUB de un libro
-- `GET /api/books/:id/position` - Obtener la posición actual de lectura de un libro
-  - Parámetros opcionales: `format` (default: 'EPUB'), `user` (default: 'usuario1'), `device` (default: 'browser')
-- `PUT /api/books/:id/position` - Actualizar posición de lectura
-  - Cuerpo: `{ position: number, format: string, user: string, device: string, cfi: string }`
+### Autores *(en desarrollo)*
+- `GET /api/v1/authors` — Listar autores *(requiere JWT)*
+- `GET /api/v1/authors/:id` — Obtener autor por ID *(requiere JWT)*
 
-### Autores
+### Etiquetas *(en desarrollo)*
+- `GET /api/v1/tags` — Listar etiquetas *(requiere JWT)*
+- `GET /api/v1/tags/:id` — Obtener etiqueta por ID *(requiere JWT)*
 
-- `GET /api/authors` - Obtener todos los autores
-- `GET /api/authors/:id` - Obtener un autor por ID
-- `GET /api/books/author/:name` - Obtener libros por nombre de autor
+### Búsqueda *(en desarrollo)*
+- `GET /api/v1/search` — Búsqueda avanzada *(requiere JWT)*
 
-### Etiquetas
+---
 
-- `GET /api/tags` - Obtener todas las etiquetas
-- `GET /api/tags/:id` - Obtener una etiqueta por ID
-- `GET /api/books/tag/:name` - Obtener libros por nombre de etiqueta
-
-### Búsqueda
-
-- `GET /api/search` - Búsqueda avanzada con filtros múltiples
-  - Parámetros: `q` (texto de búsqueda), `author` (ID autor), `tag` (ID tag), `series` (ID serie)
-  - Parámetros opcionales: `limit` (cantidad por página), `offset` (índice de inicio)
-
-### Archivos
-
-- `GET /api/file/:id/:filename` - Obtener un archivo específico (EPUB, portada, etc.)
-- `GET /static/books/:path` - Acceso directo a archivos estáticos
-
-### Endpoint Principal
-
-- `GET /` - Verificar que el servidor está funcionando
+> **Nota:** Algunos endpoints heredados o no implementados pueden aparecer en la documentación anterior, pero solo los listados aquí están activos y alineados con la arquitectura Clean Architecture + TypeScript.
 
 ## Licencia
 

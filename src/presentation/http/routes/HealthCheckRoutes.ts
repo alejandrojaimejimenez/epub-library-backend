@@ -3,6 +3,7 @@ import { HealthCheckController } from '@controllers/HealthCheckController';
 
 const router = Router();
 
-router.get('/healthcheck', HealthCheckController.check);
+// El endpoint debe ser '/'
+router.get('/', HealthCheckController.check);
 
 export default router;
