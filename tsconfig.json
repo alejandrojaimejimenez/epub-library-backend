@@ -9,7 +9,31 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@domain/*": ["domain/*"],
+      "@models/*": ["domain/models/*"],
+      "@interfaces/*": ["domain/interfaces/*"],
+      "@repositories/*": ["domain/repositories/*"],
+      "@application/*": ["application/*"],
+      "@services/*": ["application/services/*"],
+      "@usecases/*": ["application/usecases/*"],
+      "@dtos/*": ["application/dtos/*"],
+      "@infrastructure/*": ["infrastructure/*"],
+      "@auth/*": ["infrastructure/auth/*"],
+      "@db/*": ["infrastructure/db/*"],
+      "@queues/*": ["infrastructure/queues/*"],
+      "@presentation/*": ["presentation/*"],
+      "@controllers/*": ["presentation/http/controllers/*"],
+      "@routes/*": ["presentation/http/routes/*"],
+      "@middlewares/*": ["presentation/http/middlewares/*"],
+      "@shared/*": ["shared/*"],
+      "@utils/*": ["shared/utils/*"],
+      "@config/*": ["shared/config/*"],
+      "@constants/*": ["shared/constants/*"],
+      "@types/*": ["shared/types/*"]
+    }
   },
   "include": [
     "src/**/*"

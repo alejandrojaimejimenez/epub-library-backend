@@ -6,6 +6,7 @@ import searchRoutes from './searchRoutes';
 import filterRoutes from './filterRoutes';
 import authRoutes from './authRoutes';
 import { BookController } from '../controllers';
+import HealthCheckRoutes from '@presentation/http/routes/HealthCheckRoutes';
 
 // Extender la interfaz Request para añadir el parámetro filepath
 interface BookFileRequest extends Request {
@@ -34,5 +35,7 @@ router.get('/file/:id/:filename', (req, res) => {
   bookReq.params.filepath = `${bookReq.params.id}/${bookReq.params.filename}`;
   BookController.getBookFile(bookReq, res);
 });
+
+router.use('/api/v1', HealthCheckRoutes);
 
 export default router;
